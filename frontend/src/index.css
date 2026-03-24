@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-stone-950 text-stone-100 font-sans antialiased;
+    font-feature-settings: 'kern' 1;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-stone-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-stone-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-stone-500;
+  }
+}
+
+@layer components {
+  .tamil-text {
+    font-family: 'Noto Sans Tamil', serif;
+    line-height: 1.8;
+  }
+
+  .verse-card {
+    @apply bg-stone-900 border border-stone-800 rounded-xl p-4 hover:border-saffron-500/50 transition-all duration-200 cursor-pointer;
+  }
+
+  .verse-card:hover {
+    @apply shadow-lg shadow-saffron-500/10;
+  }
+
+  .topic-chip {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-saffron-400 to-temple-400 bg-clip-text text-transparent;
+  }
+
+  .panel-header {
+    @apply text-xs font-semibold uppercase tracking-widest text-stone-400 mb-3;
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-2 px-3 py-2 rounded-lg text-sm cursor-pointer transition-colors;
+  }
+
+  .sidebar-item:hover {
+    @apply bg-stone-800 text-stone-100;
+  }
+
+  .sidebar-item.active {
+    @apply bg-saffron-500/20 text-saffron-300 border border-saffron-500/30;
+  }
+}
+
+/* Prose styles for AI responses */
+.ai-response {
+  @apply text-stone-200 leading-relaxed;
+}
+
+.ai-response p {
+  @apply mb-3;
+}
+
+.ai-response strong {
+  @apply text-saffron-300 font-semibold;
+}
+
+.ai-response ul, .ai-response ol {
+  @apply ml-4 mb-3 space-y-1;
+}
+
+.ai-response li {
+  @apply text-stone-300;
+}
+
+.ai-response blockquote {
+  @apply border-l-2 border-saffron-500/50 pl-3 italic text-stone-400 my-3;
+}
+
+.ai-response h1, .ai-response h2, .ai-response h3 {
+  @apply text-saffron-300 font-semibold mb-2 mt-4;
+}
