@@ -11,7 +11,9 @@ interface VerseCardProps {
 }
 
 export default function VerseCard({ song, isSelected, onSelect, onExplain, compact }: VerseCardProps) {
-  const firstLine = song.tamil_verse.split('\n')[0]
+  const firstLine = (song.tamil_verse || '').split('\n')[0]
+  const topicNames = Array.isArray(song.topic_names) ? song.topic_names : []
+  const topics = Array.isArray(song.topics) ? song.topics : []
 
   return (
     <div
@@ -21,14 +23,13 @@ export default function VerseCard({ song, isSelected, onSelect, onExplain, compa
       )}
       onClick={() => onSelect(song)}
     >
-      {/* Header */}
       <div className="flex items-start justify-between mb-2">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="text-xs font-mono text-stone-500 bg-stone-800 px-2 py-0.5 rounded">
             #{song.song_number}
           </span>
-          {song.topic_names.slice(0, 2).map((name, i) => {
-            const topicId = song.topics[i]
+          {topicNames.slice(0, 2).map((name, i) => {
+            const topicId = topics[i]
             return (
               <span
                 key={name}
@@ -42,19 +43,17 @@ export default function VerseCard({ song, isSelected, onSelect, onExplain, compa
         </div>
         <button
           onClick={(e) => { e.stopPropagation(); onExplain(song) }}
-          className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs text-saffron-400 hover:text-saffron-300 bg-saffron-500/10 hover:bg-saffron-500/20 px-2 py-1 rounded-lg"
+          className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs text-saffron-400 hover:text-saffron-300 bg-saffron-500/10 hover:bg-saffron-500/20 px-2 py-1 rounded-lg shrink-0"
         >
           <Sparkles size={12} />
           Explain
         </button>
       </div>
 
-      {/* Tamil Verse */}
       <p className="tamil-text text-stone-200 text-sm mb-2 leading-relaxed">
-        {compact ? firstLine + (song.tamil_verse.includes('\n') ? '...' : '') : song.tamil_verse}
+        {compact ? firstLine + (song.tamil_verse?.includes('\n') ? '...' : '') : song.tamil_verse}
       </p>
 
-      {/* Explanation preview */}
       {!compact && song.tamil_explanation && (
         <div className="mt-3 pt-3 border-t border-stone-800">
           <div className="flex items-center gap-1 text-xs text-stone-500 mb-1">

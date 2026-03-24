@@ -73,12 +73,12 @@ export default function ScriptureSidebar() {
 
             {isLoading ? (
               <div className="space-y-1 py-2">
-                {[...Array(6)].map((_, i) => (
+                {[1,2,3,4,5,6].map((i) => (
                   <div key={i} className="h-8 bg-stone-800 rounded-lg animate-pulse" />
                 ))}
               </div>
             ) : (
-              topics?.map((topic) => (
+              (Array.isArray(topics) ? topics : []).map((topic) => (
                 <button
                   key={topic.id}
                   className={cn('sidebar-item w-full', selectedTopicId === topic.id && 'active')}
